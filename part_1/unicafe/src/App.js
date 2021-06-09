@@ -1,19 +1,22 @@
 import React, { useState } from 'react'
 
-const H1 = (props) => {
-  return <h1>{props.title}</h1>;
+const H1 = ({title}) => {
+  return <h1>{title}</h1>;
 };
 
-const Button = (props) => {
-  return <button onClick={props.handleClick}>{props.children}</button>
+const Button = ({handleClick, children}) => {
+  return <button onClick={handleClick}>{children}</button>
 }
 
-const Statistics = (props) => {
+const Statistics = ({good, neutral, bad}) => {
   return (
     <div>
-      <p>Good: {props.good}</p>
-      <p>Neutral: {props.neutral}</p>
-      <p>Bad: {props.bad}</p>
+      <p>Good: {good}</p>
+      <p>Neutral: {neutral}</p>
+      <p>Bad: {bad}</p>
+      <p>All: {good + neutral + bad}</p>
+      <p>Average: {(good - bad)/(good + neutral + bad)}</p>
+      <p>Positive: {good / (good + neutral + bad) * 100}%</p>
     </div>
   )
 }
