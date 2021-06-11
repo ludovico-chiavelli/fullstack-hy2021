@@ -8,19 +8,40 @@ const Button = ({handleClick, children}) => {
   return <button onClick={handleClick}>{children}</button>
 }
 
-const Statistics = ({good, neutral, bad}) => {
+const Statistic = ({name, value}) => {
+  return (
+    <tr>
+      <td>{name}</td>
+      <td>{value}</td>
+    </tr>
+  )
+}
+
+const Statistics = (props) => {
+  const { good, neutral, bad } = props
+
   if (good === 0 && neutral === 0 && bad === 0) {
     return <p>No feedback given</p>
   }
+
+  const countTotal = (good, neutral, bad) => {
+    return (good + neutral + bad)
+  }
+  const countAverage = (good, neutral, bad) => (good - bad) / (good + neutral + bad)
+  const countPercentage = (good, neutral, bad) => good / (good + neutral + bad)
+
   return (
-    <div>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>All: {good + neutral + bad}</p>
-      <p>Average: {(good - bad)/(good + neutral + bad)}</p>
-      <p>Positive: {good / (good + neutral + bad) * 100}%</p>
-    </div>
+    <table>
+      <tbody>
+        <Statistic name="good" value={good}/>
+        <Statistic name="neutral" value={neutral}/>
+        <Statistic name="bad" value={bad}/>
+        <Statistic name="Total" value={countTotal(good, neutral, bad)}/>
+        <Statistic name="Average" value={countAverage(good, neutral, bad).toFixed(3)}/>
+        {/* To fixed doesn't seem to perform consistently as sometimes it displays more digits than specified */}
+        <Statistic name="Positive" value={`${countPercentage(good, neutral, bad).toFixed(3) * 100}%`}/> 
+      </tbody>
+    </table>
   )
 }
 
@@ -47,7 +68,7 @@ const App = () => {
       <Button handleClick={handleNeutralClick}>neutral</Button>
       <Button handleClick={handleBadClick}>bad</Button>
       <H1 title="Statistics"></H1>
-      <Statistics good={good} neutral={neutral} bad={bad}></Statistics>
+      <Statistics good={good} neutral={neutral} bad={bad}/>
     </div>
   )
 }
