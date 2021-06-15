@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { random, floor } from 'mathjs'
 
 const H1 = ({title}) => {
   return <h1>{title}</h1>;
@@ -45,11 +46,26 @@ const Statistics = (props) => {
   )
 }
 
+const Anecdote = ({anecdote}) => {
+  return <p>{anecdote}</p>
+}
+
 const App = () => {
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blod tests when dianosing patients'
+  ]
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
+
+  const [selected, setSelected] = useState(0)
 
   const handleGoodClick = () => {
     setGood(good + 1)
@@ -60,6 +76,9 @@ const App = () => {
   const handleBadClick = () => {
     setBad(bad + 1)
   }
+  const handleAnecdotes = () => {
+    setSelected(floor(random() * anecdotes.length))
+  }
 
   return (
     <div>
@@ -69,6 +88,8 @@ const App = () => {
       <Button handleClick={handleBadClick}>bad</Button>
       <H1 title="Statistics"></H1>
       <Statistics good={good} neutral={neutral} bad={bad}/>
+      <Anecdote anecdote={anecdotes[selected]}/>
+      <Button handleClick={handleAnecdotes}>Next anecdote</Button>
     </div>
   )
 }
