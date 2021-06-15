@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { random, floor } from 'mathjs'
+import { random, floor, randomInt } from 'mathjs'
 
 const H1 = ({title}) => {
   return <h1>{title}</h1>;
@@ -66,6 +66,7 @@ const App = () => {
   const [bad, setBad] = useState(0)
 
   const [selected, setSelected] = useState(0)
+  const [points, setVote] = useState([0, 0, 0, 0, 0, 0, 0]) //Generate empty array with anecdotes variables length
 
   const handleGoodClick = () => {
     setGood(good + 1)
@@ -77,7 +78,17 @@ const App = () => {
     setBad(bad + 1)
   }
   const handleAnecdotes = () => {
-    setSelected(floor(random() * anecdotes.length))
+    let randomInt = floor(random() * anecdotes.length)
+    // console.log(randomInt)
+    setSelected(randomInt)
+  }
+  const handleVote = () => {
+    console.log(typeof points)
+    console.log(selected)
+    const copy = [...points]
+    copy[selected] += 1
+    setVote(copy)
+    console.log(copy)
   }
 
   return (
@@ -90,6 +101,7 @@ const App = () => {
       <Statistics good={good} neutral={neutral} bad={bad}/>
       <Anecdote anecdote={anecdotes[selected]}/>
       <Button handleClick={handleAnecdotes}>Next anecdote</Button>
+      <Button handleClick={handleVote}>Vote</Button>
     </div>
   )
 }
