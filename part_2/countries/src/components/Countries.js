@@ -1,6 +1,10 @@
 import React from "react"
 
-const Countries = ({ countries, newSearch }) => {
+const Countries = ({ countries, newSearch, setNewSearch}) => {
+    const handleClick = (event) => {
+        setNewSearch(event.target.name)
+    }
+
     let countriesToDisplay = countries.filter((country) => {
         if (newSearch === "") {
             return country;
@@ -14,7 +18,11 @@ const Countries = ({ countries, newSearch }) => {
                 countriesToDisplay.length > 10
                 ? "Too many matches, specify another filter"
                 : countriesToDisplay.length > 1
-                ? countriesToDisplay.map(country => (<p key={country.name}>{country.name}</p>))
+                ? countriesToDisplay.map(country => (
+                    <p key={country.name}>
+                        {country.name} <button onClick={handleClick} name={country.name}>show</button>
+                    </p>
+                ))
                 : countriesToDisplay.length === 1
                 ? countriesToDisplay.map(country => (
                     <div>
