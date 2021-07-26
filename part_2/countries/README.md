@@ -1,0 +1,1 @@
+Small app to show info on various countries
