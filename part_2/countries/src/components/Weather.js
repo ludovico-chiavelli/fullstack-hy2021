@@ -5,17 +5,22 @@ const Weather = ({ country }) => {
     const [weather, setWeather] = useState([])
     
     useEffect(() => {
-        axios.get(`http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_API_KEY}&query=${encodeURIComponent(country.capital)}`).then((response) => {
+        axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${country.capital}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`)
+        .then((response) => {
             setWeather(response.data)
+            console.log("This is the weather")
+            console.log(weather)
+            console.log(weather.main.temp)
+        }).catch((error) => {
+            console.log(error);
         });
-    })
-    console.log("This is weather")
-    console.log(weather)
+    }, [])
     return (
         <div>
             <h3>Weather in {country.capital}</h3>
-            <p>Temperature: {weather.temperature}</p>
-            {/* <img src={}/> */}
+            {/* <p><b>Temperature:</b> {weather.main.temp}</p>
+            <img src={`http://openweathermap.org/img/w/${weather.weather.icon}.png`} width="30%"/>
+            <p><b>Wind:</b> {weather.wind.speed} ms <b>Direction:</b>{weather.wind.deg} degrees</p> */}
         </div>
     )
 }

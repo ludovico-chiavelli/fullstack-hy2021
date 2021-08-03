@@ -26,7 +26,7 @@ const Countries = ({ countries, newSearch, setNewSearch}) => {
             ))
         } else if (countriesToDisplay.length === 1) {
             return countriesToDisplay.map(country => (
-                <div>
+                <div key={country.name}>
                     <h1>{country.name}</h1>
                     <p>Capital: {country.capital}</p>
                     <p>Population: {country.population}</p>
