@@ -1,1 +1,0 @@
-Course info app continued
