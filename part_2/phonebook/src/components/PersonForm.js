@@ -28,7 +28,7 @@ const PersonForm = ({
         number: newNumber,
       };
       personService
-      .create()
+      .create(personObject)
       .then(response => {
           console.log(response)
           setPersons(persons.concat(personObject));
@@ -45,7 +45,7 @@ const PersonForm = ({
           name: <input value={newName} onChange={handleNameChange} />
         </div>
         <div>
-          phone number:{" "}
+          phone number:
           <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
