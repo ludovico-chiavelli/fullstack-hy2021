@@ -18,8 +18,27 @@ const PersonForm = ({
       names.push(persons[i].name);
     }
 
-    if (Object.values(names).includes(newName)) {
-      alert(`${newName} is already in the phonebook`);
+    if (names.includes(newName)) {
+      if(window.confirm(`${newName} is already in the phonebook. Would you like to replace the old number with the new one?`)){
+        personService.getAll()
+        .then(response => {
+          const match = response.data.find(person => person.name === newName)
+          return match
+        })
+        .then(person => {
+          const updatedPersonObject = {
+            name: person.name,
+            number: newNumber,
+          };
+          personService.update(person.id, updatedPersonObject)
+            .then(response => {
+              console.log(response)
+              personService.getAll().then((response) => {
+                setPersons(response.data);
+              });
+          })
+        })
+      }
       setNewName("");
       setNewNumber("");
     } else {
