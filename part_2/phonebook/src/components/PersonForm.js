@@ -31,7 +31,7 @@ const PersonForm = ({
       .create(personObject)
       .then(response => {
           console.log(response)
-          setPersons(persons.concat(personObject));
+          setPersons(persons.concat(response.data));
           setNewName("");
           setNewNumber("");
         })

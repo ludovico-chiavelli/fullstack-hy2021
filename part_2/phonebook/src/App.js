@@ -23,6 +23,19 @@ const App = () => {
     setNewSearch(event.target.value);
   };
 
+  const handlePersonDeletion = (id) => {
+      if (window.confirm(`Do you really want to delete ${id}`)) {
+        personService.remove(id).then(res => {
+          console.log(res)
+          personService.getAll().then((response) => {
+            console.log(response.data);
+            setPersons(response.data);
+        })
+        });
+      }
+    
+  };
+
   useEffect(() => {
     personService.getAll().then((response) => {
       console.log(response.data);
@@ -46,7 +59,15 @@ const App = () => {
         handleNumberChange={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} newSearch={newSearch} />
+      <Persons 
+        persons={persons} 
+        setPersons={setPersons}
+        setNewName={setNewName}
+        setNewNumber={setNewNumber}
+        newSearch={newSearch} 
+        handlePersonDeletion={handlePersonDeletion} 
+
+      />
     </div>
   );
 };

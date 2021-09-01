@@ -1,6 +1,12 @@
 import React from "react";
+import DeleteButton from "../components/DeleteButton"
 
-const Persons = ({ persons, newSearch }) => {
+const Persons = ({ 
+  persons, 
+  newSearch, 
+  handlePersonDeletion, 
+  setPersons,
+}) => {
   return (
     <div>
       {persons
@@ -15,7 +21,12 @@ const Persons = ({ persons, newSearch }) => {
         })
         .map((person) => (
           <p key={person.name}>
-            {person.name} {person.number}
+            {person.name} {person.number} 
+            <DeleteButton 
+              handlePersonDeletion={handlePersonDeletion} 
+              id={person.id}
+              setPersons={setPersons}
+            />
           </p>
         ))}
     </div>
