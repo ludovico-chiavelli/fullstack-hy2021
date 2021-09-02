@@ -10,6 +10,7 @@ const PersonForm = ({
   setNewNumber,
   handleNameChange,
   handleNumberChange,
+  setMessage,
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -51,9 +52,12 @@ const PersonForm = ({
       .then(response => {
           console.log(response)
           setPersons(persons.concat(response.data));
+          setMessage(`Added ${newName}`)
           setNewName("");
           setNewNumber("");
-        })
+          setTimeout(() => setMessage(null), 5000)
+      })
+
     }
 
   };

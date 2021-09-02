@@ -4,12 +4,14 @@ import personService from "./services/persons"
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newSearch, setNewSearch] = useState("");
+  const [message, setMessage] = useState(null)
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -46,6 +48,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={message}/>
       <Filter searchTerm={newSearch} handleSearchChange={handleSearchChange} />
       <h2>Add a new person</h2>
       <PersonForm
@@ -57,6 +60,7 @@ const App = () => {
         setNewNumber={setNewNumber}
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
+        setMessage={setMessage}
       />
       <h2>Numbers</h2>
       <Persons 
