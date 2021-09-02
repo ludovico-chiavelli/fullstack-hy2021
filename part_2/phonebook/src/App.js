@@ -12,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [newSearch, setNewSearch] = useState("");
   const [message, setMessage] = useState(null)
+  const [notificationColor, setNotificationColor] = useState({color: 'green'})
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -48,7 +49,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={message}/>
+      <Notification message={message} color={notificationColor}/>
       <Filter searchTerm={newSearch} handleSearchChange={handleSearchChange} />
       <h2>Add a new person</h2>
       <PersonForm
@@ -61,6 +62,7 @@ const App = () => {
         handleNameChange={handleNameChange}
         handleNumberChange={handleNumberChange}
         setMessage={setMessage}
+        setNotificationColor={setNotificationColor}
       />
       <h2>Numbers</h2>
       <Persons 

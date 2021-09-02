@@ -11,6 +11,7 @@ const PersonForm = ({
   handleNameChange,
   handleNumberChange,
   setMessage,
+  setNotificationColor,
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -39,6 +40,13 @@ const PersonForm = ({
               });
           })
         })
+        .catch(() => {
+          setNotificationColor({color: "red"})
+          setMessage(`Information of ${newName} has alredy been removed from the server.`)
+          setNewName("");
+          setNewNumber("");
+          setTimeout(() => setMessage(null), 5000)
+        })
       }
       setNewName("");
       setNewNumber("");
@@ -57,7 +65,6 @@ const PersonForm = ({
           setNewNumber("");
           setTimeout(() => setMessage(null), 5000)
       })
-
     }
 
   };
