@@ -26,14 +26,27 @@ const App = () => {
     setNewSearch(event.target.value);
   };
 
-  const handlePersonDeletion = (id) => {
-      if (window.confirm(`Do you really want to delete ${id}`)) {
-        personService.remove(id).then(res => {
+  const handlePersonDeletion = (idNumber) => {
+      const personName = persons.find((person) => person.id === idNumber).name
+      if (window.confirm(`Do you really want to delete ${personName}?`)) {
+        personService.remove(idNumber).then(res => {
           console.log(res)
           personService.getAll().then((response) => {
             console.log(response.data);
             setPersons(response.data);
+          });
         })
+        .catch(() => {
+          setNotificationColor({color: "red"})
+          setMessage(`Information of ${personName} has alredy been removed from the server. \n${personName} will now be removed from view.`)
+          setNewName("");
+          setNewNumber("");
+          setTimeout(() => {
+            setMessage(null)
+            personService.getAll().then((response) => {
+              setPersons(response.data);
+            });
+          }, 5000)
         });
       }
     

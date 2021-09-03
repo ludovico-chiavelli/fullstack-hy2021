@@ -42,10 +42,15 @@ const PersonForm = ({
         })
         .catch(() => {
           setNotificationColor({color: "red"})
-          setMessage(`Information of ${newName} has alredy been removed from the server.`)
+          setMessage(`Information of ${newName} has alredy been removed from the server.\n${newName} will now be removed from view.`)
           setNewName("");
           setNewNumber("");
-          setTimeout(() => setMessage(null), 5000)
+          setTimeout(() => {
+            setMessage(null)
+            personService.getAll().then((response) => {
+              setPersons(response.data);
+            });
+          }, 5000)
         })
       }
       setNewName("");
