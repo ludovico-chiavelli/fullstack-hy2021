@@ -58,7 +58,7 @@ const PersonForm = ({
     } else {
       const personObject = {
         name: newName,
-        number: newNumber,
+        phoneNumber: newNumber,
       };
       personService
       .create(personObject)
