@@ -30,7 +30,7 @@ const PersonForm = ({
         .then(person => {
           const updatedPersonObject = {
             name: person.name,
-            number: newNumber,
+            phoneNumber: newNumber,
           };
           personService.update(person.id, updatedPersonObject)
             .then(response => {
