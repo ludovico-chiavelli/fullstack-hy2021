@@ -70,6 +70,19 @@ const PersonForm = ({
           setNewNumber("");
           setTimeout(() => setMessage(null), 5000)
       })
+      .catch(error => {
+        setNotificationColor({color: "red"})
+        console.log(error)
+        setMessage(`${error.response.data.error}`)
+        setNewName("");
+        setNewNumber("");
+        setTimeout(() => {
+          setMessage(null)
+          personService.getAll().then((response) => {
+            setPersons(response.data);
+          });
+        }, 5000)
+      })
     }
 
   };
