@@ -1,9 +1,9 @@
-import React from "react"
+import React from 'react'
 
 const Filter = ({ searchTerm, handleSearchChange }) => {
   return (
     <div>
-      filter shown with{" "}
+      filter shown with{' '}
       <input value={searchTerm} onChange={handleSearchChange} />
     </div>
   )

@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react"
-import personService from "./services/persons"
+import React, { useEffect, useState } from 'react'
+import personService from './services/persons'
 
-import Filter from "./components/Filter"
-import PersonForm from "./components/PersonForm"
-import Persons from "./components/Persons"
-import Notification from "./components/Notification"
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 const App = () => {
   const [persons, setPersons] = useState([])
-  const [newName, setNewName] = useState("")
-  const [newNumber, setNewNumber] = useState("")
-  const [newSearch, setNewSearch] = useState("")
+  const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
+  const [newSearch, setNewSearch] = useState('')
   const [message, setMessage] = useState(null)
   const [notificationColor, setNotificationColor] = useState({color: 'green'})
 
@@ -27,20 +27,20 @@ const App = () => {
   }
 
   const handlePersonDeletion = (idNumber) => {
-      const personName = persons.find((person) => person.id === idNumber).name
-      if (window.confirm(`Do you really want to delete ${personName}?`)) {
-        personService.remove(idNumber).then(res => {
-          console.log(res)
-          personService.getAll().then((response) => {
-            console.log(response.data)
-            setPersons(response.data)
-          })
+    const personName = persons.find((person) => person.id === idNumber).name
+    if (window.confirm(`Do you really want to delete ${personName}?`)) {
+      personService.remove(idNumber).then(res => {
+        console.log(res)
+        personService.getAll().then((response) => {
+          console.log(response.data)
+          setPersons(response.data)
         })
+      })
         .catch(() => {
-          setNotificationColor({color: "red"})
+          setNotificationColor({color: 'red'})
           setMessage(`Information of ${personName} has alredy been removed from the server. \n${personName} will now be removed from view.`)
-          setNewName("")
-          setNewNumber("")
+          setNewName('')
+          setNewNumber('')
           setTimeout(() => {
             setMessage(null)
             personService.getAll().then((response) => {
@@ -48,7 +48,7 @@ const App = () => {
             })
           }, 5000)
         })
-      }
+    }
     
   }
 

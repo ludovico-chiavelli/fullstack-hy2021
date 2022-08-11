@@ -1,5 +1,5 @@
-import React from "react"
-import DeleteButton from "../components/DeleteButton"
+import React from 'react'
+import DeleteButton from '../components/DeleteButton'
 
 const Persons = ({ 
   persons, 
@@ -11,7 +11,7 @@ const Persons = ({
     <div>
       {persons
         .filter((person) => {
-          if (newSearch === "") {
+          if (newSearch === '') {
             return person
           } else if (person.name.toLowerCase().includes(newSearch.toLowerCase())) {
             return person

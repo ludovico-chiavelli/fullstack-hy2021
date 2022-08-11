@@ -1,16 +1,16 @@
-import React from "react"
+import React from 'react'
 
 const DeleteButton = ({ 
-    handlePersonDeletion, 
-    id
+  handlePersonDeletion, 
+  id
 }) => {
-    const handleClick = () => {
-        handlePersonDeletion(id)
-    }
+  const handleClick = () => {
+    handlePersonDeletion(id)
+  }
 
-    return (
-        <button onClick={handleClick}>delete</button>
-    )
+  return (
+    <button onClick={handleClick}>delete</button>
+  )
 }
 
 export default DeleteButton
