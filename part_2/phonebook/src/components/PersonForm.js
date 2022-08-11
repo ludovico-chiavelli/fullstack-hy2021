@@ -1,5 +1,5 @@
-import React from "react";
-import personService from "../services/persons"
+import React from 'react';
+import personService from '../services/persons'
 
 const PersonForm = ({
   persons,
@@ -41,10 +41,10 @@ const PersonForm = ({
           })
         })
         .catch(() => {
-          setNotificationColor({color: "red"})
+          setNotificationColor({color: 'red'})
           setMessage(`Information of ${newName} has alredy been removed from the server.\n${newName} will now be removed from view.`)
-          setNewName("");
-          setNewNumber("");
+          setNewName('');
+          setNewNumber('');
           setTimeout(() => {
             setMessage(null)
             personService.getAll().then((response) => {
@@ -53,8 +53,8 @@ const PersonForm = ({
           }, 5000)
         })
       }
-      setNewName("");
-      setNewNumber("");
+      setNewName('');
+      setNewNumber('');
     } else {
       const personObject = {
         name: newName,
@@ -64,19 +64,19 @@ const PersonForm = ({
       .create(personObject)
       .then(response => {
           console.log(response)
-          setNotificationColor({color: "green"})
+          setNotificationColor({color: 'green'})
           setPersons(persons.concat(response.data));
           setMessage(`Added ${newName}`)
-          setNewName("");
-          setNewNumber("");
+          setNewName('');
+          setNewNumber('');
           setTimeout(() => setMessage(null), 5000)
       })
       .catch(error => {
-        setNotificationColor({color: "red"})
+        setNotificationColor({color: 'red'})
         console.log(error)
         setMessage(`${error.response.data.error}`)
-        setNewName("");
-        setNewNumber("");
+        setNewName('');
+        setNewNumber('');
         setTimeout(() => {
           setMessage(null)
           personService.getAll().then((response) => {
@@ -85,8 +85,7 @@ const PersonForm = ({
         }, 5000)
       })
     }
-
-  };
+  }
   return (
     <div>
       <form onSubmit={addPerson}>
@@ -98,11 +97,11 @@ const PersonForm = ({
           <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
-          <button type="submit">add</button>
+          <button type='submit'>add</button>
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
 export default PersonForm;
