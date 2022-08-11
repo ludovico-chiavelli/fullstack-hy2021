@@ -12,4 +12,4 @@ const Notification = ({ message, color }) => {
     )
 }
 
-export default Notification;
+export default Notification

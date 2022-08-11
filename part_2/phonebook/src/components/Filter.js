@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Filter = ({ searchTerm, handleSearchChange }) => {
   return (
@@ -6,7 +6,7 @@ const Filter = ({ searchTerm, handleSearchChange }) => {
       filter shown with{" "}
       <input value={searchTerm} onChange={handleSearchChange} />
     </div>
-  );
-};
+  )
+}
 
-export default Filter;
+export default Filter

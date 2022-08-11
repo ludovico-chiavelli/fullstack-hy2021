@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"
 import personService from "./services/persons"
 
-import Filter from "./components/Filter";
-import PersonForm from "./components/PersonForm";
-import Persons from "./components/Persons";
-import Notification from "./components/Notification";
+import Filter from "./components/Filter"
+import PersonForm from "./components/PersonForm"
+import Persons from "./components/Persons"
+import Notification from "./components/Notification"
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const [newSearch, setNewSearch] = useState("");
+  const [persons, setPersons] = useState([])
+  const [newName, setNewName] = useState("")
+  const [newNumber, setNewNumber] = useState("")
+  const [newSearch, setNewSearch] = useState("")
   const [message, setMessage] = useState(null)
   const [notificationColor, setNotificationColor] = useState({color: 'green'})
 
   const handleNameChange = (event) => {
-    setNewName(event.target.value);
-  };
+    setNewName(event.target.value)
+  }
 
   const handleNumberChange = (event) => {
-    setNewNumber(event.target.value);
-  };
+    setNewNumber(event.target.value)
+  }
 
   const handleSearchChange = (event) => {
-    setNewSearch(event.target.value);
-  };
+    setNewSearch(event.target.value)
+  }
 
   const handlePersonDeletion = (idNumber) => {
       const personName = persons.find((person) => person.id === idNumber).name
@@ -32,32 +32,32 @@ const App = () => {
         personService.remove(idNumber).then(res => {
           console.log(res)
           personService.getAll().then((response) => {
-            console.log(response.data);
-            setPersons(response.data);
-          });
+            console.log(response.data)
+            setPersons(response.data)
+          })
         })
         .catch(() => {
           setNotificationColor({color: "red"})
           setMessage(`Information of ${personName} has alredy been removed from the server. \n${personName} will now be removed from view.`)
-          setNewName("");
-          setNewNumber("");
+          setNewName("")
+          setNewNumber("")
           setTimeout(() => {
             setMessage(null)
             personService.getAll().then((response) => {
-              setPersons(response.data);
-            });
+              setPersons(response.data)
+            })
           }, 5000)
-        });
+        })
       }
     
-  };
+  }
 
   useEffect(() => {
     personService.getAll().then((response) => {
-      console.log(response.data);
-      setPersons(response.data);
-    });
-  }, []);
+      console.log(response.data)
+      setPersons(response.data)
+    })
+  }, [])
 
   return (
     <div>
@@ -88,7 +88,7 @@ const App = () => {
 
       />
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

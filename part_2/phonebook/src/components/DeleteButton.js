@@ -13,4 +13,4 @@ const DeleteButton = ({
     )
 }
 
-export default DeleteButton;
+export default DeleteButton

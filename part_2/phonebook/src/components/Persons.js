@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import DeleteButton from "../components/DeleteButton"
 
 const Persons = ({ 
@@ -12,9 +12,9 @@ const Persons = ({
       {persons
         .filter((person) => {
           if (newSearch === "") {
-            return person;
+            return person
           } else if (person.name.toLowerCase().includes(newSearch.toLowerCase())) {
-            return person;
+            return person
           } else {
             return false
           }
@@ -30,7 +30,7 @@ const Persons = ({
           </p>
         ))}
     </div>
-  );
-};
+  )
+}
 
-export default Persons;
+export default Persons
