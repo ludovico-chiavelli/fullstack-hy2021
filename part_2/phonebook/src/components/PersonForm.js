@@ -64,6 +64,7 @@ const PersonForm = ({
       .create(personObject)
       .then(response => {
           console.log(response)
+          setNotificationColor({color: "green"})
           setPersons(persons.concat(response.data));
           setMessage(`Added ${newName}`)
           setNewName("");
